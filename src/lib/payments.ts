@@ -8,7 +8,11 @@ import type { Customer } from "./schema";
 export const stripeEnabled = () => !!process.env.STRIPE_SECRET_KEY;
 /** Demo payments are allowed locally, or on a live site only if ALLOW_DEMO_PAYMENTS=true (for a test preview). */
 export const demoAllowed = () => process.env.NODE_ENV !== "production" || process.env.ALLOW_DEMO_PAYMENTS === "true";
-export const appUrl = () => (process.env.APP_URL || "http://localhost:3000").replace(/\/$/, "");
+// Falls back to Vercel's production address so a deploy works before APP_URL is set.
+export const appUrl = () =>
+  (process.env.APP_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
+    "http://localhost:3000").replace(/\/$/, "");
 
 let _stripe: Stripe | null = null;
 function stripe() {

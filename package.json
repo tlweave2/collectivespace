@@ -1,0 +1,36 @@
+{
+  "name": "collective-space",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:seed": "tsx scripts/seed.ts",
+    "setup": "tsx scripts/migrate.ts && tsx scripts/seed.ts",
+    "vercel-build": "tsx scripts/migrate.ts && tsx scripts/seed.ts && next build",
+    "test": "rm -rf .data/test && PGLITE_DIR=./.data/test tsx scripts/migrate.ts && PGLITE_DIR=./.data/test tsx scripts/seed.ts && PGLITE_DIR=./.data/test tsx scripts/test/automation.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.9",
+    "bcryptjs": "^3.0.3",
+    "drizzle-orm": "^0.45.4",
+    "next": "^15.5.27",
+    "postgres": "^3.4.9",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "stripe": "^23.0.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "drizzle-kit": "^0.31.11",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
+  },
+  "private": true
+}
